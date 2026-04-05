@@ -1,0 +1,33 @@
+trigger:
+- none
+
+pool:
+  name: anoop_pool2
+
+steps:
+- task: TerraformInstaller@1
+  inputs:
+    terraformVersion: 'latest'
+
+- task: TerraformTask@5
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    backendServiceArm: 'anoopconnection'
+    backendAzureRmResourceGroupName: 'anoop_re'
+    backendAzureRmStorageAccountName: 'anoopericsson123'
+    backendAzureRmContainerName: 'anoopcont'
+    backendAzureRmKey: 'anoop.key'
+
+- task: TerraformTask@5
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    environmentServiceNameAzureRM: 'anoopconnection'
+
+- task: TerraformTask@5
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    commandOptions: '--auto-approve'
+    environmentServiceNameAzureRM: 'anoopconnection'

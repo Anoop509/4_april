@@ -26,3 +26,11 @@ resource "azurerm_storage_account" "anoop_sa" {
   account_replication_type = "LRS"
   
 }
+
+resource "azurerm_virtual_network" "anooopvnet" {
+  name                = "anoopvnet"
+  address_space       = ["10.0.0.0/16"]
+    location             = azurerm_resource_group.anooprg.location
+    resource_group_name  = azurerm_resource_group.anooprg.name
+  
+}

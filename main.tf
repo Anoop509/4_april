@@ -34,3 +34,15 @@ resource "azurerm_virtual_network" "anooopvnet" {
     resource_group_name  = azurerm_resource_group.anooprg.name
   
 }
+resource "azurerm_subnet" "anoopsubnet" {
+  name                 = "anoopsubnet"
+  resource_group_name  = azurerm_resource_group.anooprg.name
+  virtual_network_name = azurerm_virtual_network.anooopvnet.name
+  address_prefixes     = ["10.0.1.0/24"]
+}
+
+resource "azurerm_resource_group" "anoop_5april" {
+  name     = "anoop_5april"
+  location = "West Europe"
+  
+}
